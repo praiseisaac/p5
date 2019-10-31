@@ -21,11 +21,13 @@ import java.util.ArrayList;
 
     @Override
     public void print(ArrayList<Activity> export, int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Activity activity: export){
+          //System.out.println()
+        } //To change body of generated methods, choose Tools | Templates.
     }
 
     public void export(ArrayList<Activity> export, int year, File filename){
-      
+
     }
 
 

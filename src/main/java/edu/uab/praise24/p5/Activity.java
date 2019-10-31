@@ -67,6 +67,12 @@ public class Activity {
       return description;
     }
 
+    @Override
+    public String toString(){
+      String message = "%4s | %21s | %12s | %s";
+      String output = String.format(message,year,date,role,description);
+      return output;
+    }
     // Commands for activity
     public void setRole(Role role){
       this.role = role;
