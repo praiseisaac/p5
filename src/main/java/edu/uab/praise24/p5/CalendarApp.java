@@ -15,14 +15,16 @@ import javafx.stage.Stage;
  * JavaFX CalendarApp
  */
 public class CalendarApp extends Application {
-
+    Stage stage;
     @Override
     public void start(Stage stage) throws InterruptedException {
-        AddActivityMenu(stage);
+        this.stage = stage;
+        AddActivityMenu();
     }
 
     public static void main(String[] args) {
         launch();
+        
         Activity activity = new Activity(Year.EVEN,new Date("May"),new Role("Boss"),"test description");
         System.out.println(activity);
     }
@@ -44,26 +46,30 @@ public class CalendarApp extends Application {
 
   }
 
-  public void AddActivityMenu(Stage stage){
+  public void MainMenu(Stage stage){
+
+  }
+
+  public void AddActivityMenu(){
     var javaVersion = SystemInfo.javaVersion();
     var javafxVersion = SystemInfo.javafxVersion();
     Button button = new Button("button 1");
     button.setOnAction((ActionEvent t) -> {
-        EditActivityMenu(stage);
+        EditActivityMenu();
     });
 
-    var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+    var label = new Label("Hello, JavaFX " + javafxVersion + ", Java " + javaVersion + ".");
     var scene = new Scene(new VBox(label,button), 640, 480);
     stage.setScene(scene);
     stage.show();
   }
 
-  public void EditActivityMenu(Stage stage){
+  public void EditActivityMenu(){
     var javaVersion = SystemInfo.javaVersion();
     var javafxVersion = SystemInfo.javafxVersion();
     Button button = new Button("button 1");
     button.setOnAction((ActionEvent t) -> {
-        AddActivityMenu(stage);
+        AddActivityMenu();
     });
     var label = new Label("Hello, JavaFX " + javafxVersion);
     var scene = new Scene(new HBox(label,button), 640, 480);
