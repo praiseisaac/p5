@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class Role {
     String title;
     ArrayList<Role> subroles = new ArrayList<>();
+    static ArrayList<Role> allRoles = new ArrayList<>();
     Role(String title){
         this.title = title;
     }
@@ -41,5 +42,9 @@ public class Role {
 
     public boolean matches(Role role){
         return this.title.equals(role.title);
+    }
+
+    public static ArrayList<Role> getRoles(){
+      return allRoles;
     }
 }
