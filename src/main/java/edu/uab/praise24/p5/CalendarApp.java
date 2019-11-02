@@ -149,7 +149,17 @@ public class CalendarApp extends Application {
                 new Date(textArea.get(0).getText()),
                 roleValue, textArea.get(1).getText());
             calendar.add(activity);
+            textArea.get(0).setText("");
+            textArea.get(1).setText("");
             AddActivityMenu();
+        }
+      });
+
+      Button addRole = new Button("Add Role");
+      addRole.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          AddRoleMenu();
         }
       });
 
@@ -189,6 +199,7 @@ public class CalendarApp extends Application {
       gridPane.add(textArea.get(1),1,3);
       gridPane.add(addActivity,1,4,2,1);
       gridPane.add(home,1,5,2,1);
+      gridPane.add(addRole,2,2);
 
 
       scene = new Scene(gridPane, 640, 480);
@@ -271,8 +282,14 @@ public class CalendarApp extends Application {
           public void handle(ActionEvent event) {
             Role role = new Role(textArea.get(0).getText());
             System.out.println(textArea.get(0).getText() + " added");
+            textArea.get(0).setText("");
             AddRoleMenu();
           }
+        });
+
+        Button addActivity = new Button("Add Activity");
+        addActivity.setOnAction((ActionEvent t) -> {
+            AddActivityMenu();
         });
 
         Button home = new Button("Home");
@@ -287,6 +304,7 @@ public class CalendarApp extends Application {
         gridPane.add(subroles, 1, 1);
         gridPane.add(addRole, 1, 2);
         gridPane.add(home,1,3);
+        gridPane.add(addActivity,2,3);
 
 
 
@@ -305,6 +323,9 @@ public class CalendarApp extends Application {
 
     public void ExportCalendarMenu() {
         System.out.println("export calendar");
+        // input year
+        // select role
+        // 
     }
 
 }

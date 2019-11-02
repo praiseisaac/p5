@@ -35,7 +35,7 @@ public class Calendar {
         yr = Year.ODD;
       }
       for (Activity activity : activities){
-          if (activity.role.matches(role.toString()) && activity.year == yr){
+          if (activity.role.matches(role.toString()) && (activity.getYear() == yr || activity.getYear() == Year.EACH)){
               output.add(activity);
           }
       }
