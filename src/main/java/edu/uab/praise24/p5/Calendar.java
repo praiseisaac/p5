@@ -26,7 +26,7 @@ public class Calendar {
         activities.add(activity);
     }
 
-    public ArrayList<Activity> getActivities(int year, Role role){
+    public ArrayList<Activity> getActivities(int year, String role){
       output = new ArrayList<>();
       Year yr;
       if (year%2 == 0){
@@ -35,7 +35,7 @@ public class Calendar {
         yr = Year.ODD;
       }
       for (Activity activity : activities){
-          if (activity.role.matches(role) && activity.year == yr){
+          if (activity.role.matches(role.toString()) && activity.year == yr){
               output.add(activity);
           }
       }
@@ -43,7 +43,7 @@ public class Calendar {
       return output;
     }
 
-    public ArrayList<Activity> getActivites(int year, String month, Role role){
+    public ArrayList<Activity> getActivities(int year, String month, Role role){
       output = new ArrayList<>();
       Year yr;
       if (year%2 == 0){
@@ -66,13 +66,15 @@ public class Calendar {
       Activity tempAct1 = new Activity();
 
       while (sorting == true){ // by date
+        sorting = false;
         for (int i = 1; i < output.size();i++){
-          if (output.get(i).getDate().compareTo(output.get(i-1).getDate()) == 0){
+          if (output.get(i).getDate().compareTo(output.get(i-1).getDate()) >= 0){
             // skip
           }else if (output.get(i).getDate().compareTo(output.get(i-1).getDate()) < 0){
             tempAct1.copy(output.get(i));
             output.get(i).copy(output.get(i-1));
             output.get(i-1).copy(tempAct1);
+            sorting = true;
           }
         }
       }

@@ -20,6 +20,6 @@ import java.util.ArrayList;
  * @author Praise Daramola praise24@uab.edu
  */
 public interface Printer {
-  public void print(ArrayList<Activity> export,int year);
+  public void printCalendar(ArrayList<Activity> export,int year);
 
 }

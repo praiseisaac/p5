@@ -34,7 +34,7 @@ public class Activity {
     }
 
     public boolean matches(Activity activity){
-      if (activity.role.matches(this.role) && activity.year == this.year
+      if (activity.role.toString().equals(this.getRoleValue()) && activity.year == this.year
        && this.date.matches(activity.getDate())){
           return true;
       }else {

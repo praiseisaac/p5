@@ -23,8 +23,20 @@ public class Role {
     String title;
     ArrayList<Role> subroles = new ArrayList<>();
     static ArrayList<Role> allRoles = new ArrayList<>();
+    boolean exists;
+
     Role(String title){
         this.title = title;
+        for (Role role : allRoles){
+          if (role.toString() == this.title){
+            exists = true;
+            break;
+          }
+        }
+        if(!exists){
+          addRole(this);
+        } 
+
     }
 
     @Override
@@ -40,8 +52,12 @@ public class Role {
         return subroles;
     }
 
-    public boolean matches(Role role){
-        return this.title.equals(role.title);
+    public boolean matches(String role){
+        return this.title.equals(role);
+    }
+
+    public static void addRole(Role role){
+        allRoles.add(role);
     }
 
     public static ArrayList<Role> getRoles(){
