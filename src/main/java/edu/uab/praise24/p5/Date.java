@@ -66,4 +66,31 @@ public class Date {
       }
       return 0;
     }
+
+    public static boolean isValidDate(String value){
+      String[] dates = value.split("/",2);
+      int count = 0;
+      for (String val : dates){
+        if (isMonth(val)){
+          count++;
+        }
+      }
+        if (count == 2 && dates.length == 2){
+          return true;
+        }else if (count == 1){
+          return true;
+        }
+        return false;
+    }
+
+    private static boolean isMonth(String value){
+        Month[] months = Month.values();
+        for (Month month : months) {
+            if (value.toLowerCase().equals(String.valueOf(month).toLowerCase()))
+            {
+                return true;
+            }
+        }
+      return false;
+    }
 }
