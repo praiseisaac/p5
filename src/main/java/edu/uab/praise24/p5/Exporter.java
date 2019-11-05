@@ -15,19 +15,49 @@
 package edu.uab.praise24.p5;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
- public class Exporter implements Printer{
+ public class Exporter {
 
-    @Override
-    public void printCalendar(ArrayList<Activity> export, int year) {
+     public void print(ArrayList<Activity> export) {
+        for (Activity activity: export){
+          System.out.println(activity.getId() + " - " + activity);
+        } //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void print(ArrayList<Activity> export, int year) {
+        System.out.println("Calendar for " + year);
         for (Activity activity: export){
           System.out.println(activity);
         } //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void export(ArrayList<Activity> export, int year, File filename){
+    public void Export(ArrayList<Activity> export,
+        File filename) throws FileNotFoundException{
+        PrintStream writer = new PrintStream(new FileOutputStream(filename));
 
+        for (Activity activity: export){
+            writer.println(activity.toString());
+            System.out.println("written");
+        }
+        writer.close();
+    }
+
+    public void Export(ArrayList<Activity> export,
+        File filename, int year) throws FileNotFoundException{
+        PrintStream writer = new PrintStream(new FileOutputStream(filename));
+        writer.println("Calendar for " + year);
+
+        for (Activity activity: export){
+            writer.println(activity.toString());
+            System.out.println("written");
+        }
+        writer.close();
     }
 
 

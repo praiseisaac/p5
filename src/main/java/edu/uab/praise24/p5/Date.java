@@ -24,7 +24,7 @@ public class Date {
     String value;
 
     Date(String value){
-        this.value = value;
+        this.value = value.toUpperCase();
     }
 
     public boolean contains(Month month){
@@ -40,9 +40,10 @@ public class Date {
     }
 
     public int compareTo(Date date){
-      if (date.toString().equals(this.toString())){
+      if (date.toString().toLowerCase().equals(this.toString().toLowerCase())){
         return 0;
-      } else if (stringCompare(this.toString(),date.toString()) < 0){
+      } else if (stringCompare(this.toString().toLowerCase(),
+                      date.toString().toLowerCase()) < 0){
         return -1;
       } else {
         return 1;

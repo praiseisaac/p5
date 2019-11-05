@@ -1,0 +1,13 @@
+{boss}
+{student}
+boss
+{nope}
+{alm}
+{gate}
+student
+{all}
+nope
+alm
+gate
+{bone}
+{newGuy}

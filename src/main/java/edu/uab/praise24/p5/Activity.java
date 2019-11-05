@@ -22,20 +22,45 @@ public class Activity {
     Year year;
     Role role;
     String description;
+    String ID;
+    static long idCount = 0;
+
+
     Activity(Year year, Date date, Role role, String description){
         this.year = year;
         this.date = date;
         this.role = role;
         this.description = description;
+        if (null == year){
+            ID = "EA-" + idCount;
+
+        } else switch (year) {
+            case EVEN:
+                ID = "EV-" + idCount;
+                break;
+            case ODD:
+                ID = "OD-" + idCount;
+                break;
+            default:
+                ID = "EA-" + idCount;
+                break;
+        }
+        idCount++;
+
+        updateRole();
     }
 
+    private void updateRole(){
+        Role.getRoles().get(role.getIndex()).addActivity(this);
+    }
     Activity(){
       // used to initialize tempty activity
     }
 
     public boolean matches(Activity activity){
-      if (activity.role.toString().equals(this.getRoleValue()) && activity.year == this.year
-       && this.date.matches(activity.getDate())){
+      if (activity.getRoleValue().equals(this.getRoleValue())
+      && activity.getYear() == this.getYear()
+       && this.getDate().matches(activity.getDate())){
           return true;
       }else {
           return false;
@@ -63,6 +88,10 @@ public class Activity {
       return date;
     }
 
+    public String getId(){
+      return ID;
+    }
+
     public String getDescription(){
       return description;
     }
@@ -88,8 +117,9 @@ public class Activity {
 
     public void copy(Activity activity){
       this.year = activity.getYear();
-      this.date = new Date(activity.getDateValue());
-      this.role = new Role(activity.getRoleValue());
+      this.date = activity.getDate();
+      this.role = activity.getRole();
       this.description = activity.getDescription();
+      this.ID = activity.getId();
     }
 }

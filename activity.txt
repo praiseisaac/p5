@@ -1,0 +1,5 @@
+EVEN,june,student,sfnskglm,
+ODD,may,boss,rgrgerger
+EVEN,may,nope,aefgehgege
+EVEN,august,alm,rgergqeer
+EVEN,april,alm,sgfvsabtteh

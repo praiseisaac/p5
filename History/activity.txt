@@ -1,0 +1,14 @@
+EACH,AUGUST,bone,fqefwegweg
+EACH,AUGUST,bone,fqefwegweg
+EVEN,APRIL,alm,sgfvsabtteh
+EVEN,APRIL,alm,sgfvsabtteh
+EVEN,APRIL,alm,sgfvsabtteh
+EVEN,APRIL,alm,sgfvsabtteh
+EACH,AUGUST,bone,fqefwegweg
+EVEN,JULY,student,mmmmmmmmmmmmmmmmm
+ODD,JUNE,student,its almost 6 am
+EVEN,MAY,gate,aewette
+ODD,MAY,gate,mannnn its 4 am
+ODD,MAY,gate,mannnn its 4 am
+ODD,MAY,gate,mannnn its 4 am
+EVEN,MAY,gate,aewette

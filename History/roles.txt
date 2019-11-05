@@ -1,0 +1,12 @@
+{bone}
+{alm}
+{gate}
+{student}
+alm
+{all}
+student
+gate
+{ali}
+all
+{guy}
+ali

@@ -1,0 +1,2 @@
+Something I observed while working:
+	I had a function that sorted my output activities, a weird behavior I noticed was that my copy function affected the original object thus almost always resettting my array.
