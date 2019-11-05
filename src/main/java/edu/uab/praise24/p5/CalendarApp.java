@@ -35,7 +35,7 @@ public class CalendarApp extends Application {
     ArrayList<TextField> textArea = new ArrayList<>();
     Stage stage;
     Scene scene;
-    ChoiceBox subroles, year,roleVals1;
+    ChoiceBox subroles, year, roleVals1;
     int bttnWidth = 150;
     int bttnHeight = 25;
     Year yearValue;
@@ -60,17 +60,17 @@ public class CalendarApp extends Application {
         launch();
         System.out.println("Calendar Roles");
         calendar.updateRoles();
-        for (int i = 0; i < calendar.getRoles().size();i++){
+        for (int i = 0; i < calendar.getRoles().size(); i++) {
             System.out.println(calendar.getRoles().get(i));
-            for (Role rolel : calendar.getRoles().get(i).getSubRoles()){
+            for (Role rolel : calendar.getRoles().get(i).getSubRoles()) {
                 System.out.println(rolel + " " + rolel.getIndex());
             }
         }
         System.out.println("All Roles");
-        for (int i = 0; i < Role.getRoles().size();i++){
+        for (int i = 0; i < Role.getRoles().size(); i++) {
             System.out.println(Role.getRoles().get(i));
-            for (Role rolel : Role.getRoles().get(i).getSubRoles()){
-                System.out.println(Role.getRoles().get(i)+ " s " + rolel + " " + rolel.getIndex());
+            for (Role rolel : Role.getRoles().get(i).getSubRoles()) {
+                System.out.println(Role.getRoles().get(i) + " s " + rolel + " " + rolel.getIndex());
             }
         }
         Loader.save(calendar);
@@ -286,10 +286,10 @@ public class CalendarApp extends Application {
                         roleValue = new Role(textArea.get(0).getText());
                     }
                     if (!Role.getRoles().get(roleValue.getIndex()).isParentRole(Role.getRoles().get(roleIndex))) {
-                            Role.getRoles().get(roleValue.getIndex()).addSubRole(
-                                    Role.getRoles().get(roleIndex).toString());
-                            alert.setText(Role.getRoles().get(roleIndex) + " added");
-                            AddRoleMenu();
+                        Role.getRoles().get(roleValue.getIndex()).addSubRole(
+                                Role.getRoles().get(roleIndex).toString());
+                        alert.setText(Role.getRoles().get(roleIndex) + " added");
+                        AddRoleMenu();
                     } else {
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Information Dialog");
@@ -404,14 +404,20 @@ public class CalendarApp extends Application {
                         roleValue = Role.getRoles().get(roleIndex);
                     }
                     System.out.println(Role.getIndex(
-                            textArea.get(0).getText())+ " " + roleIndex +" "+ roleIndex0);
+                            textArea.get(0).getText()) + " " + roleIndex + " " + roleIndex0);
                     //if (Role.getRoles().get(roleIndex).isHigher(Role.getRoles().get(roleIndex0))) {
-                        if (roleIndex != -1) {
-                            Role.getRoles().get(roleValue.getIndex()).addSubRole(
-                                    Role.getRoles().get(roleIndex0).toString());
-                            alert.setText(Role.getRoles().get(roleIndex0) + " added");
-                            EditRoleMenu();
-                        }
+                    if (!roleValue.matches(Role.getRoles().get(roleIndex0))) {
+                        Role.getRoles().get(roleValue.getIndex()).addSubRole(
+                                Role.getRoles().get(roleIndex0).toString());
+                        alert.setText(Role.getRoles().get(roleIndex0) + " added");
+                        calendar.updateRoles();
+                    } else {
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Information Dialog");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Role cannot be added to itself!");
+                        alert.showAndWait();
+                    }
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Information Dialog");

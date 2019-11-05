@@ -22,17 +22,24 @@ import java.time.Month;
  */
 public class Date {
     String value;
+    String[] dates = new String[2];
 
     Date(String value){
         this.value = value.toUpperCase();
+        dates = this.value.split("/",2);
     }
 
     public boolean contains(Month month){
         return value.contains(month.toString());
     }
 
+    @Override
     public String toString(){
         return value;
+    }
+    
+    public String[] getDate(){
+        return dates;
     }
 
     public boolean matches(Date date){
@@ -40,10 +47,11 @@ public class Date {
     }
 
     public int compareTo(Date date){
-      if (date.toString().toLowerCase().equals(this.toString().toLowerCase())){
+       String dt = date.toString();
+      String[] dtValue = date.getDate();
+      if (Month.valueOf(dtValue[0]).ordinal() == Month.valueOf(dates[0]).ordinal()){
         return 0;
-      } else if (stringCompare(this.toString().toLowerCase(),
-                      date.toString().toLowerCase()) < 0){
+      } else if (Month.valueOf(dates[0]).ordinal() < Month.valueOf(dtValue[0]).ordinal()){
         return -1;
       } else {
         return 1;

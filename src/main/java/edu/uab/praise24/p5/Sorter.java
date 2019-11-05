@@ -23,40 +23,45 @@ public class Sorter {
 
     public static ArrayList<Activity> sortActivity(ArrayList<Activity> tempList) {
         boolean sorting = true;
-
+        System.out.println("sorting");
         try {
             Activity tempAct1 = tempList.get(0);
             while (sorting == true) { // by date
                 sorting = false;
                 for (int i = 1; i < tempList.size(); i++) {
+                   
                     if (tempList.get(i).getDate().compareTo(tempList.get(i - 1).getDate()) >= 0) {
                         //sorting = false;
                     } else if (tempList.get(i).getDate().compareTo(tempList.get(i - 1).getDate()) < 0) {
                         tempAct1.copy(tempList.get(i));
                         tempList.get(i).copy(tempList.get(i - 1));
                         tempList.get(i - 1).copy(tempAct1);
+                        System.out.println(tempList.get(i).getDate()+ " < " +tempList.get(i - 1).getDate());
                     }
                 }
-                for (int i = 1; i < tempList.size();i++){
-                  if (tempList.get(i).getDate().compareTo(tempList.get(i - 1).getDate()) < 0) {
-                      tempAct1.copy(tempList.get(i));
-                      tempList.get(i).copy(tempList.get(i - 1));
-                      tempList.get(i - 1).copy(tempAct1);
+                
+                for (int j = 1; j < tempList.size();j++){
+                  if (tempList.get(j).getDate().compareTo(tempList.get(j - 1).getDate()) < 0) {
                       sorting = true;
+                      break;
                   }
                 }
+            }
+            for (int j = 1; j < tempList.size(); j++) {
+                System.out.println(tempList.get(j));
             }
             System.out.println("sorted");
             return tempList;
         } catch (Exception e) {
+            System.out.println(e);
             return tempList;
         }
     }
 
     public static ArrayList<Activity> removeDuplicatesActivity(ArrayList<Activity> out) {
-
+        System.out.println("trying");
         try {
-          System.out.println("trying");
+          
             ArrayList<Activity> tempList = new ArrayList<>();
             ArrayList<Activity> output = sortActivity(out);
             int count = 0;

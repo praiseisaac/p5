@@ -48,7 +48,7 @@ public class Calendar {
         for (Role rl : Role.getRoles().get(role.getIndex()).subroles) {
             System.out.println(rl);
         }
-        return Sorter.removeDuplicatesActivity((out));
+        return Sorter.removeDuplicatesActivity(out);
     }
 
     public ArrayList<Activity> getActivities(int year) {

@@ -42,15 +42,16 @@ public class Loader {
         filename = new File(System.getProperty("user.dir") + "\\History\\roles.txt");
         filename.getParentFile().mkdirs();
         writer = new PrintStream(new FileOutputStream(filename));
-
-        for (Role role : Role.getRoles()) {
-            writer.println("{" + role.toString() + "}");
-            for (Role rl : role.getSubRoles()) {
+        for (int i = 0; i < Role.getTotal();i++){
+            temp.clear();
+            writer.println("{" + Role.getRoles().get(i) + "}");
+            for (Role rl : Role.getRoles().get(i).getSubRoles()) {
                 if (!containedIn(temp, rl.toString())) {
                     writer.println(rl.toString());
                     temp.add(rl.toString());
                 }
             }
+            
             System.out.println("written");
         }
         writer.close();
@@ -79,7 +80,7 @@ public class Loader {
         File filename;
         try {
             filename = new File(System.getProperty("user.dir") + "\\History\\roles.txt");
-            file = new Scanner(filename);
+            file = new Scanner(filename,"utf-8");
             roleVal = null;
             while (file.hasNextLine()) {
                 fname = file.nextLine();
@@ -110,7 +111,7 @@ public class Loader {
         try {
             filename = new File(System.getProperty("user.dir") + "\\History\\activity.txt");
             filename.getParentFile().mkdirs();
-            file = new Scanner(filename);
+            file = new Scanner(filename,"utf-8");
             roleVal = null;
             while (file.hasNextLine()) {
                 fname = file.nextLine();
