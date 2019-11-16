@@ -6,11 +6,7 @@
  *
  * Credits:  (if any for sections of code)
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edu.uab.praise24.p5;
 
 /**
@@ -57,6 +53,11 @@ public class Activity {
       // used to initialize tempty activity
     }
 
+    /**
+     *
+     * @param activity
+     * @return
+     */
     public boolean matches(Activity activity){
       if (activity.getRoleValue().equals(this.getRoleValue())
       && activity.getYear() == this.getYear()
@@ -68,30 +69,59 @@ public class Activity {
     }
 
     // Queries for activity
+
+    /**
+     *
+     * @return
+     */
     public String getRoleValue(){
       return role.toString();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDateValue(){
       return date.toString();
     }
 
+    /**
+     *
+     * @return
+     */
     public Role getRole(){
       return role;
     }
 
+    /**
+     *
+     * @return
+     */
     public Year getYear(){
       return year;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDate(){
       return date;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getId(){
       return ID;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription(){
       return description;
     }
@@ -103,18 +133,35 @@ public class Activity {
       return output;
     }
     // Commands for activity
+
+    /**
+     *
+     * @param role
+     */
     public void setRole(Role role){
       this.role = role;
     }
 
+    /**
+     *
+     * @param year
+     */
     public void setYear(Year year){
       this.year = year;
     }
 
+    /**
+     *
+     * @param date
+     */
     public void setDate(Date date){
       this.date = date;
     }
 
+    /**
+     *
+     * @param activity
+     */
     public void copy(Activity activity){
       this.year = activity.getYear();
       this.date = activity.getDate();

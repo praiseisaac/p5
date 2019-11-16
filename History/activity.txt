@@ -4,6 +4,7 @@ ODD,JANUARY,alm,whewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
 ODD,JANUARY,alm,whewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
 EACH,FEBRUARY,student,m,pj 8gh lublkj
 ODD,FEBRUARY,student,cmon
+ODD,FEBRUARY,student,doin a great job
 ODD,MARCH,student,ughhhhhhhhhhhhhh
 EVEN,APRIL,alm,sgfvsabtteh
 EVEN,APRIL,alm,sgfvsabtteh
@@ -13,9 +14,14 @@ EVEN,MAY,gate,aewette
 ODD,MAY,gate,mannnn its 4 am
 ODD,MAY,gate,mannnn its 4 am
 ODD,MAY,gate,mannnn its 4 am
+EVEN,MAY/JUNE,student,snadifjqoifej
+EVEN,MAY,Busy guy,mdnckac
 ODD,JUNE,student,its almost 6 am
 EVEN,JULY,student,mmmmmmmmmmmmmmmmm
+ODD,JULY,monday,mlkolj g ugk
+EACH,JULY/AUGUST,alm,vvvvvvvvvvvvvvvvvvvvv
+EACH,JULY/AUGUST,alm,vvvvvvvvvvvvvvvvvvvvv
 EACH,JULY,student,woah woah
-EACH,AUGUST,bone,fqefwegweg
-EACH,AUGUST,bone,fqefwegweg
+EVEN,JULY,Neverland,ldjaduqpd[q
 ODD,AUGUST,student,testing again
+EACH,AUGUST,bone,fqefwegweg

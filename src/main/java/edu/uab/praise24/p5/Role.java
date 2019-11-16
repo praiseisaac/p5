@@ -55,10 +55,19 @@ public class Role {
         return title;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIndex() {
         return indexId;
     }
 
+    /**
+     *
+     * @param role
+     * @return
+     */
     public static int getIndex(String role) {
         for (Role role2 : allRoles) {
             if (role.equals(role2.toString())) {
@@ -68,9 +77,13 @@ public class Role {
         return -1;
     }
 
+    /**
+     *
+     * @param role
+     */
     public void addSubRole(Role role) {
         try {
-            if (!this.matches(role.toString())) {
+            if (!(this.matches(role.toString()) && isParentRole(role))) {
                 subroles.add(role);
                 for (Role srole : role.getSubRoles()) {
                     if (!this.matches(srole.toString())) {
@@ -85,6 +98,10 @@ public class Role {
         //Role.getRoles().get(role.getIndex()).addParentRole(this);
     }
 
+    /**
+     *
+     * @param role
+     */
     public void addSubRole(String role) {
         int ind = 0;
         ArrayList<Role> temp = subroles;
@@ -92,7 +109,7 @@ public class Role {
             for (Role role2 : allRoles) {
                 if (role.matches(role2.toString())) {
                     ind = role2.getIndex();
-                    
+
                     for (int i = 0; i < Role.getRoles().get(indexId).getSubRoles().size(); i++){
                       for (Role role1: Role.getRoles().get(ind).getSubRoles()){
                         if (role1.matches(subroles.get(i).toString())){
@@ -108,9 +125,13 @@ public class Role {
             subroles = temp;
             Role.getRoles().get(ind).addParentRole(this);
         }
-        
+
     }
 
+    /**
+     *
+     * @param activity
+     */
     public void addActivity(Activity activity) {
         try {
             activities.add(activity);
@@ -120,6 +141,11 @@ public class Role {
         }
     }
 
+    /**
+     *
+     * @param activity
+     * @return
+     */
     public boolean activityExists(Activity activity) {
         for (Activity act : getActivities()) {
             if (activity.matches(act)) {
@@ -129,6 +155,11 @@ public class Role {
         return false;
     }
 
+    /**
+     *
+     * @param role1
+     * @return
+     */
     public boolean isHigher(Role role1) {
         boolean value = false;
 
@@ -148,6 +179,10 @@ public class Role {
         return value;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Activity> getActivities() {
         ArrayList<Activity> activity = Sorter.removeDuplicatesActivity(activities);
         for (Role role : subroles) {
@@ -169,10 +204,33 @@ public class Role {
         //Sorter.removeDuplicatesRole(parentroles);
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Role> getParentRoles() {
         return parentroles;
     }
 
+    /**
+     *
+     * @param role
+     * @return
+     */
+    public boolean isSubrole(Role role){
+        for (Role rl : subroles){
+          if (role.matches(rl)){
+            return true;
+          }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param role
+     * @return
+     */
     public boolean isParentRole(Role role) {
         for (Role rl : parentroles) {
             if (rl.matches(role.toString())) {
@@ -182,26 +240,53 @@ public class Role {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Role> getSubRoles() {
         return subroles;
     }
 
+    /**
+     *
+     * @param role
+     * @return
+     */
     public boolean matches(String role) {
         return this.title.equals(role);
     }
-    
+
+    /**
+     *
+     * @param role
+     * @return
+     */
     public boolean matches(Role role) {
         return this.title.equals(role.toString());
     }
 
+    /**
+     *
+     * @param role
+     */
     public static void addRole(Role role) {
         allRoles.add(role);
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<Role> getRoles() {
         return allRoles;
     }
 
+    /**
+     *
+     * @param role
+     * @return
+     */
     public int compareTo(Role role) {
         if (role.toString().toLowerCase().equals(title.toLowerCase())) {
             return 0;
@@ -231,10 +316,18 @@ public class Role {
         return 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public static int getTotal(){
         return index;
     }
 
+    /**
+     *
+     * @param role
+     */
     public void copy(Role role) {
         this.title = role.toString();
         this.subroles = role.getSubRoles();

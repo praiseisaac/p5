@@ -21,9 +21,13 @@ import java.util.ArrayList;
  */
 public class Sorter {
 
+    /**
+     *
+     * @param tempList
+     * @return
+     */
     public static ArrayList<Activity> sortActivity(ArrayList<Activity> tempList) {
         boolean sorting = true;
-        System.out.println("sorting");
         try {
             Activity tempAct1 = tempList.get(0);
             while (sorting == true) { // by date
@@ -36,7 +40,6 @@ public class Sorter {
                         tempAct1.copy(tempList.get(i));
                         tempList.get(i).copy(tempList.get(i - 1));
                         tempList.get(i - 1).copy(tempAct1);
-                        System.out.println(tempList.get(i).getDate()+ " < " +tempList.get(i - 1).getDate());
                     }
                 }
                 
@@ -47,17 +50,17 @@ public class Sorter {
                   }
                 }
             }
-            for (int j = 1; j < tempList.size(); j++) {
-                System.out.println(tempList.get(j));
-            }
-            System.out.println("sorted");
             return tempList;
         } catch (Exception e) {
-            System.out.println(e);
             return tempList;
         }
     }
 
+    /**
+     *
+     * @param out
+     * @return
+     */
     public static ArrayList<Activity> removeDuplicatesActivity(ArrayList<Activity> out) {
         System.out.println("trying");
         try {
@@ -88,6 +91,11 @@ public class Sorter {
         return false;
     }
 
+    /**
+     *
+     * @param tempList
+     * @return
+     */
     public static ArrayList<Role> sortRole(ArrayList<Role> tempList) {
         boolean sorting = true;
 
@@ -116,6 +124,11 @@ public class Sorter {
         }
     }
 
+    /**
+     *
+     * @param out
+     * @return
+     */
     public static ArrayList<Role> removeDuplicatesRole(ArrayList<Role> out) {
 
         try {
@@ -128,7 +141,6 @@ public class Sorter {
                     tempList.add(output.get(i));
                     count++;
                 }
-                System.out.println(output.get(i));
             }
             return tempList;
         } catch (Exception e) {

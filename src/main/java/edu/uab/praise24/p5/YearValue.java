@@ -18,5 +18,19 @@ package edu.uab.praise24.p5;
  * @author Praise Daramola praise24@uab.edu
  */
 public enum YearValue {
-    EVEN,ODD,EACH;
+
+    /**
+     *
+     */
+    EVEN,
+
+    /**
+     *
+     */
+    ODD,
+
+    /**
+     *
+     */
+    EACH;
 }

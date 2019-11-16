@@ -1,0 +1,29 @@
+ICS format
+
+beginning declearation:
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:icalendar-ruby
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Praise Daramola Calendar (Canvas)
+X-WR-CALDESC:Calendar events for the user\, Praise Daramola
+
+Creating an event:
+BEGIN:VEVENT
+DTSTAMP:20190606T161900Z
+UID:event-assignment-5992859
+DTSTART;VALUE=DATE:20190910T000000
+DTEND;VALUE=DATE:20190910T000000
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Inner classes and enumerations [FA2019 EE 333-2C Engr Programming u
+ sing Objects]
+URL:https://uab.instructure.com/calendar?include_contexts=course_1509591&mo
+ nth=09&year=2019#assignment_5992859
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+
+end declearation:
+END:VCALENDAR

@@ -4,12 +4,6 @@
  * Assignment:  P5-praise24 - EE333 Fall 2019
  * Vers: 1.0.0 10/22/2019 P.D - initial coding
  *
- * Credits:  (if any for sections of code)
- */
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package edu.uab.praise24.p5;
 
@@ -21,14 +15,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ *  This class is used to load and save history
+ * 
  * @author Praise Daramola praise24@uab.edu
  */
 public class Loader {
 
+    /**
+     *  This method is used to save history.
+     * 
+     * @param calendar
+     * @throws FileNotFoundException
+     */
     public static void save(Calendar calendar) throws FileNotFoundException {
         // saves the files to a folder called history
-        File filename = new File(System.getProperty("user.dir") + "\\History\\activity.txt");
+        File filename = new File(System.getProperty("user.dir") + "/History/activity.txt");
 
         PrintStream writer = new PrintStream(new FileOutputStream(filename));
         ArrayList<String> temp = new ArrayList<>();;
@@ -36,14 +37,13 @@ public class Loader {
         for (Activity activity : calendar.getActivities()) {
             writer.println(activity.getYear() + "," + activity.getDateValue()
                     + "," + activity.getRoleValue() + "," + activity.getDescription());
-            System.out.println("written");
         }
         writer.close();
-        filename = new File(System.getProperty("user.dir") + "\\History\\roles.txt");
+        filename = new File(System.getProperty("user.dir") + "/History/roles.txt");
         filename.getParentFile().mkdirs();
         writer = new PrintStream(new FileOutputStream(filename));
         for (int i = 0; i < Role.getTotal();i++){
-            temp.clear();
+            temp.clear(); 
             writer.println("{" + Role.getRoles().get(i) + "}");
             for (Role rl : Role.getRoles().get(i).getSubRoles()) {
                 if (!containedIn(temp, rl.toString())) {
@@ -51,8 +51,6 @@ public class Loader {
                     temp.add(rl.toString());
                 }
             }
-            
-            System.out.println("written");
         }
         writer.close();
     }
@@ -66,16 +64,22 @@ public class Loader {
         return false;
     }
 
+    /**
+     * This method is used to load saved history
+     * 
+     * @return Calendar
+     * @throws FileNotFoundException
+     */
     public static Calendar load() throws FileNotFoundException {
         Calendar calendar = new Calendar();
-        boolean start = false;
-        StringBuilder role = null;
+        boolean start;
+        StringBuilder role;
         String fname;
         Scanner file;
         String[] actName;
         Activity activity;
         ArrayList<Role> subRoleH = new ArrayList<>();
-        Role roleVal = null;
+        Role roleVal;
         // pass the path to the file as a parameter
         File filename;
         try {
@@ -95,10 +99,11 @@ public class Loader {
                     }
                     roleVal = new Role(role.toString());
                     start = true;
+                    System.out.println("===" + roleVal);
                 }
                 if (!start) {
                     Role rl = new Role(fname);
-                    roleVal.addSubRole(Role.getRoles().get(rl.getIndex()));
+                    Role.getRoles().get(roleVal.getIndex()).addSubRole(Role.getRoles().get(rl.getIndex()));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -120,6 +125,7 @@ public class Loader {
 
                 activity = new Activity(Year.valueOf(actName[0]),
                         new Date(actName[1]), new Role(actName[2]), actName[3]);
+                
                 calendar.add(activity);
             }
         } catch (FileNotFoundException e) {
