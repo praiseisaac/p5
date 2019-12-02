@@ -39,6 +39,20 @@ public class Date {
     public boolean contains(String month){
         return value.contains(month);
     }
+    
+    /**
+     * used to get all existing dates
+     * 
+     * @return String 
+     */
+    public static String[] allDates(){
+        String[] dateValues = new String[13];
+        dateValues[0] = "N/A";
+        for (int i  = 1; i < 13;i++){
+            dateValues[i] = Month.values()[i - 1].toString();
+        }
+        return dateValues;
+    }
 
     /**
      * prints the value of the date
@@ -98,15 +112,17 @@ public class Date {
      */
     public static boolean isValidDate(String value){
       String[] dates = value.split("/",2);
-      int count = 0;
+      int count = 0, count2 = 0;
       for (String val : dates){
         if (isMonth(val)){
+            
           count++;
         }
+        count2++;
       }
-        if (count == 2 && dates.length == 2){
+        if (count == 2 && count2 == 2){
           return true;
-        }else if (count == 1){
+        }else if (count == 1 && !(count2 == 2)){
           return true;
         }
         return false;

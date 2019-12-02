@@ -1,14 +1,6 @@
 {all}
-{alm}
-all
-{student}
-{gate}
-{monday}
-{Neverland}
-Busy guy
-student
-{Busy guy}
-student
-{bone}
-{oh na na}
-monday
+{ExCom}
+{Director}
+ExCom
+{Treasurer}
+ExCom

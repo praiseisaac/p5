@@ -1,25 +1,26 @@
-/*
+/**
  * File: Activity.java
  * Author: Praise Daramola praise24@uab.edu
  * Assignment:  P5-praise24 - EE333 Fall 2019
+ * Vers: 1.1.0 10/30/2019 P.D - modification for the calendar app
  * Vers: 1.0.0 10/22/2019 P.D - initial coding
  *
- * Credits:  (if any for sections of code)
  */
 
 package edu.uab.praise24.p5;
 
 /**
- *
+ *  This class allows for the creation of an activity
+ * 
  * @author Praise Daramola praise24@uab.edu
  */
 public class Activity {
-    Date date;
-    Year year;
-    Role role;
-    String description;
-    String ID;
-    static long idCount = 0;
+    private Date date;
+    private Year year;
+    private Role role;
+    private String description;
+    private String ID;
+    private static long idCount = 0;
 
 
     Activity(Year year, Date date, Role role, String description){
@@ -49,14 +50,12 @@ public class Activity {
     private void updateRole(){
         Role.getRoles().get(role.getIndex()).addActivity(this);
     }
-    Activity(){
-      // used to initialize tempty activity
-    }
 
     /**
-     *
+     * used to compare to another activity
+     * 
      * @param activity
-     * @return
+     * @return boolean
      */
     public boolean matches(Activity activity){
       if (activity.getRoleValue().equals(this.getRoleValue())
@@ -71,56 +70,63 @@ public class Activity {
     // Queries for activity
 
     /**
-     *
-     * @return
+     * used to get the string representation of the role
+     * 
+     * @return String
      */
     public String getRoleValue(){
       return role.toString();
     }
 
     /**
-     *
-     * @return
+     * Used to get the string representation of the date
+     * 
+     * @return String
      */
     public String getDateValue(){
       return date.toString();
     }
 
     /**
-     *
-     * @return
+     * Used to get the role
+     * 
+     * @return Role
      */
     public Role getRole(){
       return role;
     }
 
     /**
-     *
-     * @return
+     * Used to get the year
+     * 
+     * @return Year
      */
     public Year getYear(){
       return year;
     }
 
     /**
-     *
-     * @return
+     * Used to get the date
+     * 
+     * @return Date
      */
     public Date getDate(){
       return date;
     }
 
     /**
-     *
-     * @return
+     * Used to get the activity ID
+     * 
+     * @return String
      */
     public String getId(){
       return ID;
     }
 
     /**
-     *
-     * @return
+     * Used to get the description for an activity
+     * 
+     * @return String
      */
     public String getDescription(){
       return description;
@@ -135,7 +141,8 @@ public class Activity {
     // Commands for activity
 
     /**
-     *
+     * Used to explicitly set the role for an activity.
+     * 
      * @param role
      */
     public void setRole(Role role){
@@ -143,7 +150,8 @@ public class Activity {
     }
 
     /**
-     *
+     * Used to explicitly set the year for an activity
+     * 
      * @param year
      */
     public void setYear(Year year){
@@ -151,6 +159,7 @@ public class Activity {
     }
 
     /**
+     * Used to explicitly set the date for an activity
      *
      * @param date
      */
@@ -159,7 +168,8 @@ public class Activity {
     }
 
     /**
-     *
+     * Copy's another activity's information to this activity
+     * 
      * @param activity
      */
     public void copy(Activity activity){

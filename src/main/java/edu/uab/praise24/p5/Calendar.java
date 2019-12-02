@@ -1,48 +1,45 @@
-/*
+/**
  * File: Calendar.java
  * Author: Praise Daramola praise24@uab.edu
  * Assignment:  P5-praise24 - EE333 Fall 2019
+ * Vers: 1.2.0 11/16/2019 P.D - debugging
+ * Vers: 1.1.0 11/08/2019 P.D - modification for calendar app
+ * Vers: 1.0.1 10/30/2019 P.D - debugging
  * Vers: 1.0.0 10/22/2019 P.D - initial coding
  *
- * Credits:  (if any for sections of code)
- */
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package edu.uab.praise24.p5;
 
 import java.util.ArrayList;
 
 /**
- *
+ * This Class allows for the creation of a calendar object
+ * 
  * @author Praise Daramola praise24@uab.edu
  */
 public class Calendar {
 
-    ArrayList<Activity> activities = new ArrayList<>();
-    static ArrayList<Activity> output;
-    ArrayList<Activity> temp;
-    ArrayList<Role> roles = new ArrayList<>();
+    private ArrayList<Activity> activities = new ArrayList<>();
+    private ArrayList<Activity> temp;
+    private ArrayList<Role> roles = new ArrayList<>();
 
     /**
-     *
+     * Used to add an activity to the calendar
+     * 
      * @param activity
      */
     public void add(Activity activity) {
         activities.add(activity);
-        System.out.println("adding");
     }
 
     /**
-     *
+     * used to get a list of activities from the calendar
+     * 
      * @param role
-     * @return
+     * @return ArrayList
      */
     public ArrayList<Activity> getActivities(Role role) {
         ArrayList<Activity> out = new ArrayList<>();
-        System.out.println("getting");
         
         for (Activity activity : activities) {
             for (Role srole : Role.getRoles().get(role.getIndex()).getSubRoles()) {
@@ -54,17 +51,14 @@ public class Calendar {
                 out.add(activity);
             }
         }
-        System.out.println("printing sub roles");
-        for (Role rl : Role.getRoles().get(role.getIndex()).subroles) {
-            System.out.println(rl);
-        }
         return Sorter.removeDuplicatesActivity(out);
     }
 
     /**
-     *
+     * used to get a list of activities from the calendar
+     * 
      * @param year
-     * @return
+     * @return ArrayList
      */
     public ArrayList<Activity> getActivities(int year) {
         ArrayList<Activity> out = new ArrayList<>();
@@ -84,17 +78,19 @@ public class Calendar {
     }
 
     /**
-     *
-     * @return
+     * Used to get all activities from the calendar
+     * 
+     * @return ArrayList
      */
     public ArrayList<Activity> getActivities() {
         return activities;
     }
 
     /**
-     *
+     * used to get a list of activities from the calendar
+     * 
      * @param month
-     * @return
+     * @return ArrayList
      */
     public ArrayList<Activity> getActivities(String month) {
         ArrayList<Activity> out = new ArrayList<>();
@@ -109,7 +105,7 @@ public class Calendar {
     }
 
     /**
-     *
+     * Updates the roles in the calendar
      */
     public void updateRoles() {
         roles.clear();
@@ -119,19 +115,21 @@ public class Calendar {
     }
 
     /**
-     *
-     * @return
+     * Used to get the roles from the calendar
+     * 
+     * @return ArrayList
      */
     public ArrayList<Role> getRoles() {
         return roles;
     }
 
     /**
-     *
+     * used to get a list of activities from the calendar
+     * 
      * @param year
      * @param month
      * @param role
-     * @return
+     * @return ArrayList
      */
     public ArrayList<Activity> getActivities(int year, String month, Role role) {
         ArrayList<Activity> solu = new ArrayList<>();
@@ -159,11 +157,12 @@ public class Calendar {
     }
     
     /**
-     *
+     * used to get a list of activities from the calendar
+     * 
      * @param year
      * @param month
      * @param role
-     * @return
+     * @return ArrayList
      */
     public ArrayList<Activity> getActivities(String month, Role role) {
         ArrayList<Activity> solu = new ArrayList<>();
@@ -178,10 +177,11 @@ public class Calendar {
     }
     
     /**
-     *
+     * used to get a list of activities from the calendar
+     * 
      * @param year
      * @param role
-     * @return
+     * @return ArrayList
      */
     public ArrayList<Activity> getActivities(int year, Role role) {
         ArrayList<Activity> solu = new ArrayList<>();

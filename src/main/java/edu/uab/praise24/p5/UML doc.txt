@@ -1,0 +1,117 @@
+
+Class name:  Activity 
+- updateRole()
++ boolean matches(Activity activity)
++ String getRoleValue()
++ String getDateValue()
++ Role getRole()
++ Year getYear()
++ Date getDate()
++ String getId()
++ String getDescription()
++ String toString()
++ setRole(Role role)
++ setYear(Year year)
++ setDate(Date date)
++ copy(Activity activity)
+
+Class name:  Calendar 
++ add(Activity activity) 
++ ArrayList<Activity> getActivities(Role role) 
++ ArrayList<Activity> getActivities(int year) 
++ ArrayList<Activity> getActivities() 
++ ArrayList<Activity> getActivities(String month) 
++ updateRoles() 
++ ArrayList<Role> getRoles() 
++ ArrayList<Activity> getActivities(int year, String month, Role role) 
++ ArrayList<Activity> getActivities(String month, Role role) 
++ ArrayList<Activity> getActivities(int year, Role role) 
+
+Class name:  CalendarApp extends Application 
++ start(Stage stage) throws InterruptedException 
++ static void main(String[] args) throws FileNotFoundException 
++ MainMenu() 
++ AddActivityMenu() 
++ changed(ObservableValue ov, Number value, Number new_value) 
++ changed(ObservableValue ov, Number value, Number new_value) 
++ AddRoleMenu() 
++ changed(ObservableValue ov, Number value, Number new_value) 
++ handle(ActionEvent event) 
++ handle(ActionEvent event) 
++ EditRoleMenu() 
++ changed(ObservableValue ov, Number value, Number new_value) 
++ changed(ObservableValue ov, Number value, Number new_value) 
++ handle(ActionEvent event) 
++ handle(ActionEvent event) 
++ ExportCalendarMenu() 
++ ExportByRoleMenu() 
++ changed(ObservableValue ov, Number value, Number new_value) 
++ changed(ObservableValue ov, Number value, Number new_value) 
++ ExportByYearMenu() 
++ ExportByMonthMenu() 
++ changed(ObservableValue ov, Number value, Number new_value) 
+
+Class name:  Date 
++ boolean contains(String month)
++ static String[] allDates()
++ String toString()
++ String[] getDate()
++ boolean matches(Date date)
++ int compareTo(Date date)
++ static boolean isValidDate(String value)
+
+Class name:  Exporter 
++ print(ArrayList<Activity> export) 
++ print(ArrayList<Activity> export, int year) 
++ print(ArrayList<Activity> export, int year, String month) 
++ print(ArrayList<Activity> export, String month) 
++ print(ArrayList<Activity> export, Role role) 
++ print(ArrayList<Activity> export, Role role, int year) 
++ print(ArrayList<Activity> export, Role role, int year, String month) 
++ print(ArrayList<Activity> export, Role role, String month) 
++ Export(ArrayList<Activity> export,
++ Export(ArrayList<Activity> export,
++ Export(ArrayList<Activity> export,
++ Export(ArrayList<Activity> export,
++ Export(ArrayList<Activity> export,
++ Export(ArrayList<Activity> export,
++ Export(ArrayList<Activity> export,
++ Export(ArrayList<Activity> export,
+
+Class name:  Loader 
++ static void save(Calendar calendar) throws FileNotFoundException 
++ static Calendar load() throws FileNotFoundException 
+
+Class name:  Role 
++ String toString() 
++ int getIndex() 
++ static int getIndex(String role) 
++ addSubRole(Role role) 
++ addSubRole(String role) 
++ addActivity(Activity activity) 
++ boolean activityExists(Activity activity) 
++ ArrayList<Activity> getActivities() 
+- addParentRole(Role role) 
++ ArrayList<Role> getParentRoles() 
++ boolean isSubrole(Role role)
++ boolean isParentRole(Role role) 
++ ArrayList<Role> getSubRoles() 
++ boolean matches(String role) 
++ boolean matches(Role role) 
++ static void addRole(Role role) 
++ static ArrayList<Role> getRoles() 
++ int compareTo(Role role) 
+- int stringCompare(String value1, String value2) 
++ static int getTotal()
++ copy(Role role) 
+
+Class name:  Sorter 
++ static ArrayList<Activity> sortActivity(ArrayList<Activity> tempList) 
++ static ArrayList<Activity> removeDuplicatesActivity(ArrayList<Activity> out) 
++ static ArrayList<Role> sortRole(ArrayList<Role> tempList) 
++ static ArrayList<Role> removeDuplicatesRole(ArrayList<Role> out) 
+
+Class name:  SystemInfo 
++ static String javaVersion() 
++ static String javafxVersion() 
++ enum Year 

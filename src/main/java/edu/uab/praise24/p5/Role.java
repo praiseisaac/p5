@@ -1,34 +1,32 @@
-/*
+/**
  * File: Role.java
  * Author: Praise Daramola praise24@uab.edu
  * Assignment:  P5-praise24 - EE333 Fall 2019
+ * Vers: 1.0.1 11/05/2019 P.D - debugging
+ * Vers: 1.0.2 11/02/2019 P.D - modification for calendar app
+ * Vers: 1.0.1 10/30/2019 P.D - debugging
  * Vers: 1.0.0 10/22/2019 P.D - initial coding
  *
- * Credits:  (if any for sections of code)
- */
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package edu.uab.praise24.p5;
 
 import java.util.ArrayList;
 
 /**
- *
+ * This class is used to create a role object 
+ * 
  * @author Praise Daramola praise24@uab.edu
  */
 public class Role {
 
-    String title;
-    ArrayList<Role> subroles = new ArrayList<>();
-    ArrayList<Role> parentroles = new ArrayList<>();
-    ArrayList<Activity> activities;
-    static ArrayList<Role> allRoles = new ArrayList<>();
-    boolean exists;
+    private String title;
+    private ArrayList<Role> subroles = new ArrayList<>();
+    private ArrayList<Role> parentroles = new ArrayList<>();
+    private ArrayList<Activity> activities;
+    private static ArrayList<Role> allRoles = new ArrayList<>();
+    private boolean exists;
     private static int index = 0;
-    int indexId;
+    private int indexId;
 
     Role(String title) {
         this.title = title;
@@ -36,14 +34,12 @@ public class Role {
             if (role.toString().toLowerCase().equals(title.toLowerCase())) {
                 exists = true;
                 this.indexId = role.getIndex();
-                System.out.println(role + "=" + title + " - " + indexId);
                 break;
             }
         }
         if (!exists) {
             addRole(this);
             this.indexId = index;
-            System.out.println(indexId + " = " + index);
             index++;
 
         }
@@ -56,17 +52,19 @@ public class Role {
     }
 
     /**
-     *
-     * @return
+     * used to get the index of a role
+     * 
+     * @return int
      */
     public int getIndex() {
         return indexId;
     }
 
     /**
-     *
+     * Used to get the index of a role
+     * 
      * @param role
-     * @return
+     * @return int
      */
     public static int getIndex(String role) {
         for (Role role2 : allRoles) {
@@ -78,7 +76,8 @@ public class Role {
     }
 
     /**
-     *
+     * Used to add a sub role to a role 
+     * 
      * @param role
      */
     public void addSubRole(Role role) {
@@ -88,18 +87,16 @@ public class Role {
                 for (Role srole : role.getSubRoles()) {
                     if (!this.matches(srole.toString())) {
                         subroles.add(srole);
-                        System.out.println(srole + " added to " + Role.getRoles().get(indexId));
                     }
                 }
             }
         } catch (NullPointerException e) {
         }
-        //Sorter.removeDuplicatesRole(subroles);
-        //Role.getRoles().get(role.getIndex()).addParentRole(this);
     }
 
     /**
-     *
+     * Used to add a sub role to a role 
+     * 
      * @param role
      */
     public void addSubRole(String role) {
@@ -129,22 +126,23 @@ public class Role {
     }
 
     /**
-     *
+     * Used to add an activity to a role
+     * 
      * @param activity
      */
     public void addActivity(Activity activity) {
         try {
             activities.add(activity);
-            System.out.println(activity + " added to " + Role.getRoles().get(indexId));
         } catch (NullPointerException e) {
 
         }
     }
 
     /**
-     *
+     * Used to verify if a role has an activity
+     * 
      * @param activity
-     * @return
+     * @return boolean
      */
     public boolean activityExists(Activity activity) {
         for (Activity act : getActivities()) {
@@ -156,32 +154,9 @@ public class Role {
     }
 
     /**
-     *
-     * @param role1
-     * @return
-     */
-    public boolean isHigher(Role role1) {
-        boolean value = false;
-
-        if (Role.getRoles().get(role1.getIndex()).getSubRoles() == null) {
-            value = false;
-        } else {
-            for (Role rl : Role.getRoles().get(role1.getIndex()).getSubRoles()) {
-                if (rl.getIndex() == this.getIndex()) {
-                    value = false;
-                } else if (isHigher(rl) == true && rl.getIndex() != this.getIndex()){
-                    value = true;
-                    return value;
-                }
-            }
-        }
-        System.out.println("Heirachy verification: " + title + " " + value);
-        return value;
-    }
-
-    /**
-     *
-     * @return
+     * Used to get the activities for a role
+     * 
+     * @return ArrayList
      */
     public ArrayList<Activity> getActivities() {
         ArrayList<Activity> activity = Sorter.removeDuplicatesActivity(activities);
@@ -192,30 +167,29 @@ public class Role {
                 }
             }
         }
-        System.out.println("getting activities for " + this);
         return activity;
     }
 
     private void addParentRole(Role role) {
         if (!(isParentRole(role) && role.matches(title))) {
-            System.out.println("new parent role " + Role.getRoles().get(role.getIndex()));
             parentroles.add(Role.getRoles().get(role.getIndex()));
         }
-        //Sorter.removeDuplicatesRole(parentroles);
     }
 
     /**
-     *
-     * @return
+     * Used to get the parent roles for a role
+     * 
+     * @return ArrayList
      */
     public ArrayList<Role> getParentRoles() {
         return parentroles;
     }
 
     /**
-     *
+     * Used to verify is a role is a sub role of this role
+     * 
      * @param role
-     * @return
+     * @return boolean
      */
     public boolean isSubrole(Role role){
         for (Role rl : subroles){
@@ -227,9 +201,10 @@ public class Role {
     }
 
     /**
-     *
+     * used to verify if a role is a parent role of this role
+     * 
      * @param role
-     * @return
+     * @return boolean
      */
     public boolean isParentRole(Role role) {
         for (Role rl : parentroles) {
@@ -241,51 +216,57 @@ public class Role {
     }
 
     /**
-     *
-     * @return
+     * used to get the sub roles for a role
+     * 
+     * @return ArrayList
      */
     public ArrayList<Role> getSubRoles() {
         return subroles;
     }
 
     /**
-     *
+     * Used to check if a role has that title
+     * 
      * @param role
-     * @return
+     * @return boolean
      */
     public boolean matches(String role) {
         return this.title.equals(role);
     }
 
     /**
-     *
+     * Used to compare a two roles
+     * 
      * @param role
-     * @return
+     * @return boolean
      */
     public boolean matches(Role role) {
         return this.title.equals(role.toString());
     }
 
     /**
-     *
+     * Used to add a role to the array list of all existing roles
+     * 
      * @param role
      */
-    public static void addRole(Role role) {
+    private static void addRole(Role role) {
         allRoles.add(role);
     }
 
     /**
-     *
-     * @return
+     * Used to get all the existing roles
+     * 
+     * @return ArrayList
      */
     public static ArrayList<Role> getRoles() {
         return allRoles;
     }
 
     /**
-     *
+     * Used to compare two role's titles alphabetically
+     * 
      * @param role
-     * @return
+     * @return int 
      */
     public int compareTo(Role role) {
         if (role.toString().toLowerCase().equals(title.toLowerCase())) {
@@ -298,6 +279,12 @@ public class Role {
         }
     }
 
+    /**
+     * Used to compare two strings
+     * 
+     * @param role
+     * @return int 
+     */
     private int stringCompare(String value1, String value2) {
 
         for (int i = 0; i < value1.length(); i++) {
@@ -317,15 +304,17 @@ public class Role {
     }
 
     /**
-     *
-     * @return
+     * used to get the total number of existing roles
+     * 
+     * @return int 
      */
     public static int getTotal(){
         return index;
     }
 
     /**
-     *
+     * used to copy one role's information into another one
+     * 
      * @param role
      */
     public void copy(Role role) {

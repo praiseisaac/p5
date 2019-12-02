@@ -2,6 +2,7 @@
  * File: Calendar.java
  * Author: Praise Daramola praise24@uab.edu
  * Assignment:  P5-praise24 - EE333 Fall 2019
+ * Vers: 2.0.1 11/16/2019 P.D - Debugging
  * Vers: 2.0.0 11/08/2019 P.D - GUI redesign
  * Vers: 1.3.0 11/06/2019 P.D - Role hierarchy verification
  * Vers: 1.2.0 11/05/2019 P.D - debugging
@@ -41,6 +42,8 @@ import javafx.stage.Stage;
 /**
  * This app is used to keep track of activities assigned to different roles This
  * application gives the user the ability to create new roles and activities
+ * 
+ * @author Praise Daramola
  */
 public class CalendarApp extends Application {
 
@@ -292,59 +295,58 @@ public class CalendarApp extends Application {
 
             @Override
             public void handle(ActionEvent event) {
-
-                // ensures there is a role name input before proceeding
-                if (!(textArea.get(0).getText().equals("") && textArea.get(0).getText().equals("all"))) {
-                    if (roleValue == null) {
-                        roleValue = new Role(textArea.get(0).getText());
-                    }
-                    /**
-                     *  checks to verify that the role does not exist and the 
-                     *  role is not lower than its sub role
-                    */
-                    if (!(roleValue.matches(Role.getRoles().get(roleIndex))
-                            && Role.getRoles().get(roleIndex).isSubrole(roleValue)
-                            && Role.getRoles().get(roleIndex).toString().equals("all"))) {
-                        Role.getRoles().get(roleValue.getIndex()).addSubRole(
-                                Role.getRoles().get(roleIndex).toString());
-                        alert.setText(Role.getRoles().get(roleIndex) + " added");
-                        AddRoleMenu();
-                    } 
-                    /*
+                if (roleIndex != -1) {
+                    // ensures there is a role name input before proceeding
+                    if (!textArea.get(0).getText().equals("") && !textArea.get(0).getText().equals("all")) {
+                        if (roleValue == null) {
+                            roleValue = new Role(textArea.get(0).getText());
+                        }
+                        /**
+                         * checks to verify that the role does not exist and the
+                         * role is not lower than its sub role
+                         */
+                        if (!(roleValue.matches(Role.getRoles().get(roleIndex))
+                                && Role.getRoles().get(roleIndex).isSubrole(roleValue)
+                                && Role.getRoles().get(roleIndex).toString().equals("all"))) {
+                            Role.getRoles().get(roleValue.getIndex()).addSubRole(
+                                    Role.getRoles().get(roleIndex).toString());
+                            alert.setText(Role.getRoles().get(roleIndex) + " added");
+                            AddRoleMenu();
+                        } /*
                      *  prevents the user from adding a subrole to the all pseudo
                      *  role
-                     */ 
-                    else if (Role.getRoles().get(roleIndex).toString().equals("all")) {
+                         */ else if (Role.getRoles().get(roleIndex).toString().equals("all")) {
+                            Alert alert = new Alert(AlertType.INFORMATION);
+                            alert.setTitle("Information Dialog");
+                            alert.setHeaderText(null);
+                            alert.setContentText("The 'all' role cannot be a sub role!");
+                            alert.showAndWait();
+                        } else if (Role.getRoles().get(roleIndex).isSubrole(roleValue)) {
+                            Alert alert = new Alert(AlertType.INFORMATION);
+                            alert.setTitle("Information Dialog");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Cannot add sub role due to hierarchy!");
+                            alert.showAndWait();
+                        } else {
+                            Alert alert = new Alert(AlertType.INFORMATION);
+                            alert.setTitle("Information Dialog");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Role cannot be added due to itself");
+                            alert.showAndWait();
+                        }
+                    } else if (textArea.get(0).getText().equals("all")) {
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Information Dialog");
                         alert.setHeaderText(null);
-                        alert.setContentText("The 'all' role cannot be a sub role!");
-                        alert.showAndWait();
-                    } else if (Role.getRoles().get(roleIndex).isSubrole(roleValue)) {
-                        Alert alert = new Alert(AlertType.INFORMATION);
-                        alert.setTitle("Information Dialog");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Cannot add sub role due to hierarchy!");
+                        alert.setContentText("The 'all' title already exists!");
                         alert.showAndWait();
                     } else {
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Information Dialog");
                         alert.setHeaderText(null);
-                        alert.setContentText("Role cannot be added due to itself");
+                        alert.setContentText("Invalid role title!");
                         alert.showAndWait();
                     }
-                } else if (textArea.get(0).getText().equals("all")) {
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Dialog");
-                    alert.setHeaderText(null);
-                    alert.setContentText("The 'all' title already exists!");
-                    alert.showAndWait();
-                } else {
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Information Dialog");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Invalid role title!");
-                    alert.showAndWait();
                 }
             }
         });
@@ -404,6 +406,7 @@ public class CalendarApp extends Application {
         roleIndex = -1;
         roleIndex0 = -1;
         roleValue = null;
+        alert.setText("");
         // creatinig the gird pane
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -451,20 +454,22 @@ public class CalendarApp extends Application {
                     }
                     // checks to verify that the role does not exist and the 
                     // role is not lower than its sub role
-                    if (!(roleValue.matches(Role.getRoles().get(roleIndex0))
-                            && roleValue.isSubrole(Role.getRoles().get(roleIndex0)))
+                    if (!roleValue.matches(Role.getRoles().get(roleIndex0))
+                            && !Role.getRoles().get(roleIndex0).isSubrole(roleValue)
                             && !Role.getRoles().get(roleIndex0).toString().equals("all")) {
                         Role.getRoles().get(roleValue.getIndex()).addSubRole(
                                 Role.getRoles().get(roleIndex0).toString());
                         alert.setText(Role.getRoles().get(roleIndex0) + " added");
                         calendar.updateRoles();
+                        stage.setScene(scene);
+                        stage.show();
                     } else if (Role.getRoles().get(roleIndex0).toString().equals("all")) {
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Information Dialog");
                         alert.setHeaderText(null);
                         alert.setContentText("The 'all' role cannot be a sub role!");
                         alert.showAndWait();
-                    }else if (roleValue.isSubrole(Role.getRoles().get(roleIndex0))) {
+                    } else if (Role.getRoles().get(roleIndex0).isSubrole(roleValue)) {
                         Alert alert = new Alert(AlertType.INFORMATION);
                         alert.setTitle("Information Dialog");
                         alert.setHeaderText(null);
@@ -499,14 +504,9 @@ public class CalendarApp extends Application {
         addRole.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (roleIndex != -1) {
-                    if (roleValue == null) {
-                        roleValue = Role.getRoles().get(roleIndex);
-                    }
+                if (roleIndex > 0) {
                     calendar.updateRoles();
-                    alert.setText(textArea.get(0).getText() + " created");
-                    textArea.get(0).setText("");
-                    AddRoleMenu();
+                    EditRoleMenu();
                 }
             }
         });
@@ -624,11 +624,15 @@ public class CalendarApp extends Application {
         browse.setOnAction((ActionEvent t) -> {
             try {
                 FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+                FileChooser.ExtensionFilter extFilter = 
+                        new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+                FileChooser.ExtensionFilter extFilter2 = 
+                        new FileChooser.ExtensionFilter("ICS files (*.ics)", "*.ics");
                 fileChooser.getExtensionFilters().add(extFilter);
+                fileChooser.getExtensionFilters().add(extFilter2);
                 file = fileChooser.showSaveDialog(stage);
                 textArea.get(0).setText(file.toString());
-                gridPane.add(textArea.get(0), 1, 1);
+                gridPane.add(textArea.get(0), 1, 3);
                 scene = new Scene(gridPane, 640, 480);
                 stage.setScene(scene);
                 stage.show();
@@ -637,13 +641,13 @@ public class CalendarApp extends Application {
             }
         });
 
-        ChoiceBox roleDates = new ChoiceBox(FXCollections.observableArrayList(Month.values()));
+        ChoiceBox roleDates = new ChoiceBox(FXCollections.observableArrayList(Date.allDates()));
         roleDates.setMaxWidth(150);
         roleDates.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             // if the item of the list is changed
             @Override
             public void changed(ObservableValue ov, Number value, Number new_value) {
-                dateValue = Month.values()[new_value.intValue()].toString();
+                dateValue = Date.allDates()[new_value.intValue()];
             }
         });
         TextField roleYear = new TextField();
@@ -659,7 +663,18 @@ public class CalendarApp extends Application {
                         exporter.print(activities, Role.getRoles().get(roleIndex));
                     } else if (!roleYear.getText().equals("") && dateValue.equals("")) {
                         // get calendar by year and role
-                        System.out.println(roleYear.getText());
+                        ArrayList<Activity> activities = calendar.getActivities(
+                                Integer.valueOf(roleYear.getText()),
+                                Role.getRoles().get(roleIndex));
+                        exporter.print(activities,
+                                Role.getRoles().get(roleIndex),
+                                Integer.valueOf(roleYear.getText()));
+                    } else if (roleYear.getText().equals("") && dateValue.equals("N/A")) {
+                        ArrayList<Activity> activities = calendar.getActivities(
+                                Role.getRoles().get(roleIndex));
+                        exporter.print(activities, Role.getRoles().get(roleIndex));
+                    } else if (!roleYear.getText().equals("") && dateValue.equals("N/A")) {
+                        // get calendar by year and role
                         ArrayList<Activity> activities = calendar.getActivities(
                                 Integer.valueOf(roleYear.getText()),
                                 Role.getRoles().get(roleIndex));
@@ -668,7 +683,6 @@ public class CalendarApp extends Application {
                                 Integer.valueOf(roleYear.getText()));
                     } else if (roleYear.getText().equals("") && !dateValue.equals("")) {
                         // get calendar by year and role
-                        System.out.println(roleYear.getText());
                         ArrayList<Activity> activities = calendar.getActivities(dateValue,
                                 Role.getRoles().get(roleIndex));
                         exporter.print(activities,
@@ -676,7 +690,6 @@ public class CalendarApp extends Application {
                                 dateValue);
                     } else {
                         // get calendar by role, year and date
-                        System.out.println(roleYear.getText());
                         ArrayList<Activity> activities = calendar.getActivities(
                                 Integer.valueOf(roleYear.getText()),
                                 dateValue,
@@ -713,7 +726,6 @@ public class CalendarApp extends Application {
                         }
                     } else if (!roleYear.getText().equals("") && dateValue.equals("")) {
                         // get calendar by year and role
-                        System.out.println(roleYear.getText());
                         ArrayList<Activity> activities = calendar.getActivities(
                                 Integer.valueOf(roleYear.getText()),
                                 Role.getRoles().get(roleIndex));
@@ -724,7 +736,6 @@ public class CalendarApp extends Application {
                         }
                     } else if (roleYear.getText().equals("") && !dateValue.equals("")) {
                         // get calendar by year and role
-                        System.out.println(roleYear.getText());
                         ArrayList<Activity> activities = calendar.getActivities(dateValue,
                                 Role.getRoles().get(roleIndex));
                         if (file != null) {
@@ -734,7 +745,6 @@ public class CalendarApp extends Application {
                         }
                     } else {
                         // get calendar by role, year and date
-                        System.out.println(roleYear.getText());
                         ArrayList<Activity> activities = calendar.getActivities(
                                 Integer.valueOf(roleYear.getText()),
                                 dateValue,
@@ -826,8 +836,12 @@ public class CalendarApp extends Application {
         browse.setOnAction((ActionEvent t) -> {
             try {
                 FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+                FileChooser.ExtensionFilter extFilter = 
+                        new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+                FileChooser.ExtensionFilter extFilter2 = 
+                        new FileChooser.ExtensionFilter("ICS files (*.ics)", "*.ics");
                 fileChooser.getExtensionFilters().add(extFilter);
+                fileChooser.getExtensionFilters().add(extFilter2);
                 file = fileChooser.showSaveDialog(stage);
                 textArea.get(1).setText(file.toString());
                 gridPane.add(textArea.get(1), 1, 1);
@@ -916,8 +930,12 @@ public class CalendarApp extends Application {
         browse.setOnAction((ActionEvent t) -> {
             try {
                 FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+                FileChooser.ExtensionFilter extFilter = 
+                        new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+                FileChooser.ExtensionFilter extFilter2 = 
+                        new FileChooser.ExtensionFilter("ICS files (*.ics)", "*.ics");
                 fileChooser.getExtensionFilters().add(extFilter);
+                fileChooser.getExtensionFilters().add(extFilter2);
                 file = fileChooser.showSaveDialog(stage);
                 textArea.get(0).setText(file.toString());
                 gridPane.add(textArea.get(0), 1, 1);
@@ -934,7 +952,7 @@ public class CalendarApp extends Application {
         printCal.setOnAction((ActionEvent t) -> {
             if (dateValue != null) {
                 ArrayList<Activity> activities = calendar.getActivities(dateValue);
-                exporter.print(activities);
+                exporter.print(activities, dateValue);
             }
 
         });
@@ -946,7 +964,7 @@ public class CalendarApp extends Application {
                 ArrayList<Activity> activities = calendar.getActivities(
                         dateValue);
                 if (file != null) {
-                    exporter.Export(activities, file);
+                    exporter.Export(activities, file, dateValue);
                 }
 
             } catch (FileNotFoundException e) {

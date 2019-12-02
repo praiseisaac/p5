@@ -1,7 +1,9 @@
-/*
+/**
  * File: Loader.java
  * Author: Praise Daramola praise24@uab.edu
  * Assignment:  P5-praise24 - EE333 Fall 2019
+ * Vers: 1.0.1 11/05/2019 P.D - debugging
+ * Vers: 1.0.1 11/01/2019 P.D - debugging
  * Vers: 1.0.0 10/22/2019 P.D - initial coding
  *
  */
@@ -34,7 +36,7 @@ public class Loader {
         PrintStream writer = new PrintStream(new FileOutputStream(filename));
         ArrayList<String> temp = new ArrayList<>();;
 
-        for (Activity activity : calendar.getActivities()) {
+        for (Activity activity : Sorter.removeDuplicatesActivity(calendar.getActivities())) {
             writer.println(activity.getYear() + "," + activity.getDateValue()
                     + "," + activity.getRoleValue() + "," + activity.getDescription());
         }
@@ -88,7 +90,6 @@ public class Loader {
             roleVal = null;
             while (file.hasNextLine()) {
                 fname = file.nextLine();
-                System.out.println(fname);
                 start = false;
                 if (fname.contains("{")) {
                     subRoleH.clear();
@@ -99,7 +100,6 @@ public class Loader {
                     }
                     roleVal = new Role(role.toString());
                     start = true;
-                    System.out.println("===" + roleVal);
                 }
                 if (!start) {
                     Role rl = new Role(fname);
@@ -107,7 +107,6 @@ public class Loader {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("making file");
             filename = new File(System.getProperty("user.dir") + "\\History\\roles.txt");
             filename.getParentFile().mkdirs();
             PrintStream writer = new PrintStream(new FileOutputStream(filename));
@@ -129,7 +128,6 @@ public class Loader {
                 calendar.add(activity);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("making file");
             filename = new File(System.getProperty("user.dir") + "\\History\\activity.txt");
             filename.getParentFile().mkdirs();
             PrintStream writer = new PrintStream(new FileOutputStream(filename));
